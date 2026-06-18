@@ -9,8 +9,8 @@
       <h2>{{ service.name }}</h2>
       <p class="service-desc">{{ service.description }}</p>
       <div class="service-meta-large">
-        <span class="service-price-large">¥{{ service.price }}</span>
-        <span class="service-duration-large">约{{ service.duration }}分钟</span>
+        <span class="service-price-large">¥{{ service.basePrice }}</span>
+        <span class="service-duration-large">约{{ service.defaultDuration }}分钟</span>
       </div>
       <button class="btn btn-primary" (click)="bookNow()">立即预约</button>
     </div>

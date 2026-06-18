@@ -5,9 +5,14 @@ interface ServiceItem {
   id: number;
   name: string;
   description: string;
-  price: number;
-  duration: number;
-  image: string;
+  basePrice: number;
+  defaultDuration: number;
+  coverImg: string;
+  categoryId: number;
+  sort: number;
+  status: number;
+  createTime: string;
+  updateTime: string;
 }
 
 @Component({

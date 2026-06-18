@@ -26,7 +26,7 @@ export class ServiceDetailComponent implements OnInit {
 
   loadServiceDetail(): void {
     this.loading = true;
-    this.apiService.get('/service/items/' + this.serviceId)
+    this.apiService.get('/service/item/' + this.serviceId)
       .subscribe({
         next: (res: any) => {
           if (res.code === 200) {
