@@ -1,0 +1,48 @@
+<div class="register-container">
+  <div class="register-card">
+    <h2>创建账户</h2>
+    <p class="register-subtitle">注册成为会员</p>
+
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="register-form">
+      <div class="form-group">
+        <label>手机号码 *</label>
+        <input type="tel" formControlName="phone" class="form-control" placeholder="请输入手机号码">
+        <div *ngIf="registerForm.get('phone')?.invalid && registerForm.get('phone')?.touched" class="error-text">
+          请输入有效的手机号码
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>昵称 *</label>
+        <input type="text" formControlName="nickname" class="form-control" placeholder="请输入昵称">
+        <div *ngIf="registerForm.get('nickname')?.invalid && registerForm.get('nickname')?.touched" class="error-text">
+          昵称至少2个字符
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>密码 *</label>
+        <input type="password" formControlName="password" class="form-control" placeholder="请输入密码（至少6位）">
+        <div *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched" class="error-text">
+          密码至少6个字符
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>确认密码 *</label>
+        <input type="password" formControlName="confirmPassword" class="form-control" placeholder="请再次输入密码">
+        <div *ngIf="registerForm.hasError('passwordMismatch') && registerForm.get('confirmPassword')?.touched" class="error-text">
+          两次输入的密码不一致
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-primary btn-block" [disabled]="submitting">
+        {{ submitting ? '注册中...' : '注册' }}
+      </button>
+    </form>
+
+    <div class="register-footer">
+      <p>已有账户？ <a (click)="goToLogin()" class="link">立即登录</a></p>
+    </div>
+  </div>
+</div>

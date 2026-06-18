@@ -1,0 +1,56 @@
+<h2>确认预约</h2>
+
+<div *ngIf="service" class="confirm-container">
+  <div class="service-summary card">
+    <h3>服务信息</h3>
+    <div class="summary-row">
+      <span class="label">服务项目：</span>
+      <span class="value">{{ service.name }}</span>
+    </div>
+    <div class="summary-row">
+      <span class="label">服务价格：</span>
+      <span class="value price">¥{{ service.price }}</span>
+    </div>
+    <div class="summary-row">
+      <span class="label">服务时长：</span>
+      <span class="value">{{ service.duration }}分钟</span>
+    </div>
+  </div>
+
+  <form [formGroup]="orderForm" (ngSubmit)="submitOrder()" class="order-form card">
+    <h3>预约信息</h3>
+
+    <div class="form-group">
+      <label>联系人姓名 *</label>
+      <input type="text" formControlName="customerName" class="form-control" placeholder="请输入您的姓名">
+    </div>
+
+    <div class="form-group">
+      <label>联系电话 *</label>
+      <input type="tel" formControlName="customerPhone" class="form-control" placeholder="请输入手机号码">
+    </div>
+
+    <div class="form-group">
+      <label>服务地址 *</label>
+      <input type="text" formControlName="serviceAddress" class="form-control" placeholder="请输入详细地址">
+    </div>
+
+    <div class="form-group">
+      <label>预约时间 *</label>
+      <input type="datetime-local" formControlName="appointmentTime" class="form-control">
+    </div>
+
+    <div class="form-group">
+      <label>备注</label>
+      <textarea formControlName="remark" class="form-control" rows="3" placeholder="其他需求或注意事项"></textarea>
+    </div>
+
+    <button type="submit" class="btn btn-primary btn-block" [disabled]="submitting">
+      {{ submitting ? '提交中...' : '确认预约' }}
+    </button>
+  </form>
+</div>
+
+<div *ngIf="!service" class="empty">
+  请先选择服务项目
+</div>

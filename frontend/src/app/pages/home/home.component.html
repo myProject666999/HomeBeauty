@@ -1,0 +1,35 @@
+<div class="hero">
+  <h2>上门理发美甲，专业服务到家</h2>
+  <p>宝妈带娃出不了门？老人腿脚不便？专业师傅上门服务，让美丽更简单</p>
+</div>
+
+<h3 class="section-title">服务分类</h3>
+<div class="category-grid">
+  <div class="category-item" *ngFor="let category of categories" routerLink="/services">
+    <div class="category-icon">{{ category.icon }}</div>
+    <div class="category-name">{{ category.name }}</div>
+  </div>
+</div>
+
+<div class="features">
+  <div class="feature-item">
+    <div class="feature-icon">✅</div>
+    <h4>持证上岗</h4>
+    <p>所有手艺人经过严格审核</p>
+  </div>
+  <div class="feature-item">
+    <div class="feature-icon">📍</div>
+    <h4>就近匹配</h4>
+    <p>智能匹配附近空闲手艺人</p>
+  </div>
+  <div class="feature-item">
+    <div class="feature-icon">⏰</div>
+    <h4>准时到达</h4>
+    <p>预约时段精准安排</p>
+  </div>
+  <div class="feature-item">
+    <div class="feature-icon">💰</div>
+    <h4>透明收费</h4>
+    <p>明码标价无隐形消费</p>
+  </div>
+</div>

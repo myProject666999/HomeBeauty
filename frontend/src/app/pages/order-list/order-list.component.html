@@ -1,0 +1,30 @@
+<h2>我的订单</h2>
+
+<div *ngIf="loading" class="loading">加载中...</div>
+
+<div *ngIf="!loading && orders.length > 0" class="order-list">
+  <div class="order-card card" *ngFor="let order of orders">
+    <div class="order-header">
+      <span class="order-no">订单号：{{ order.orderNo }}</span>
+      <span class="order-status" [class]="getStatusClass(order.status)">{{ getStatusText(order.status) }}</span>
+    </div>
+    <div class="order-content">
+      <h3 class="order-service">{{ order.serviceName }}</h3>
+      <div class="order-info">
+        <p><span>预约时间：</span>{{ order.appointmentTime }}</p>
+        <p><span>下单时间：</span>{{ order.createTime }}</p>
+      </div>
+      <div class="order-footer">
+        <span class="order-price">¥{{ order.price }}</span>
+        <div class="order-actions">
+          <button *ngIf="order.status === 'PENDING'" class="btn btn-cancel" (click)="cancelOrder(order.id)">取消订单</button>
+          <button class="btn btn-primary">查看详情</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="!loading && orders.length === 0" class="empty">
+  暂无订单
+</div>

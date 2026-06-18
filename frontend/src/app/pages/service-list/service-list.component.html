@@ -1,0 +1,23 @@
+<h2>服务项目</h2>
+
+<div *ngIf="loading" class="loading">加载中...</div>
+
+<div class="service-grid" *ngIf="!loading">
+  <div class="service-card" *ngFor="let service of services" [routerLink]="['/service', service.id]">
+    <div class="service-image">
+      <span class="service-icon">💇</span>
+    </div>
+    <div class="service-info">
+      <h3>{{ service.name }}</h3>
+      <p class="service-desc">{{ service.description }}</p>
+      <div class="service-meta">
+        <span class="service-price">¥{{ service.price }}</span>
+        <span class="service-duration">{{ service.duration }}分钟</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="!loading && services.length === 0" class="empty">
+  暂无服务项目
+</div>

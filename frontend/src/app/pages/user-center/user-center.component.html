@@ -1,0 +1,49 @@
+<h2>个人中心</h2>
+
+<div *ngIf="loading" class="loading">加载中...</div>
+
+<div *ngIf="!loading && user" class="user-center">
+  <div class="user-info card">
+    <div class="user-avatar">
+      <span class="avatar-icon">👤</span>
+    </div>
+    <div class="user-details">
+      <h3>{{ user.nickname || user.username }}</h3>
+      <p class="user-phone">{{ user.phone }}</p>
+    </div>
+  </div>
+
+  <div class="menu-list card">
+    <div class="menu-item" routerLink="/orders">
+      <span class="menu-icon">📋</span>
+      <span class="menu-title">我的订单</span>
+      <span class="menu-arrow">›</span>
+    </div>
+    <div class="menu-item">
+      <span class="menu-icon">❤️</span>
+      <span class="menu-title">我的收藏</span>
+      <span class="menu-arrow">›</span>
+    </div>
+    <div class="menu-item">
+      <span class="menu-icon">⭐</span>
+      <span class="menu-title">我的评价</span>
+      <span class="menu-arrow">›</span>
+    </div>
+    <div class="menu-item">
+      <span class="menu-icon">📍</span>
+      <span class="menu-title">地址管理</span>
+      <span class="menu-arrow">›</span>
+    </div>
+    <div class="menu-item">
+      <span class="menu-icon">⚙️</span>
+      <span class="menu-title">设置</span>
+      <span class="menu-arrow">›</span>
+    </div>
+  </div>
+
+  <button class="btn btn-logout" (click)="logout()">退出登录</button>
+</div>
+
+<div *ngIf="!loading && !user" class="empty">
+  请先登录
+</div>
