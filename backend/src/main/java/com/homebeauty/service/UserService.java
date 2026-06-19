@@ -58,6 +58,7 @@ public class UserService {
 
         String token = JwtUtil.generateToken(user.getId(), "user");
 
+        user.setPassword(null);
         Map<String, Object> result = new HashMap<>();
         result.put("user", user);
         result.put("token", token);
@@ -87,6 +88,7 @@ public class UserService {
 
         String token = JwtUtil.generateToken(user.getId(), "user");
 
+        user.setPassword(null);
         Map<String, Object> result = new HashMap<>();
         result.put("user", user);
         result.put("token", token);

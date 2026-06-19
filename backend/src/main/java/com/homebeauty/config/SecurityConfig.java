@@ -28,12 +28,14 @@ public class SecurityConfig {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                .antMatchers("/user/register", "/user/login").permitAll()
+                .antMatchers("/user/register", "/user/login", "/user/info").permitAll()
                 .antMatchers("/artisan/register", "/artisan/login").permitAll()
                 .antMatchers("/service/**").permitAll()
                 .antMatchers("/artisan/nearby").permitAll()
                 .antMatchers("/artisan/{id}").permitAll()
-                .anyRequest().authenticated()
+                .antMatchers("/order/create").permitAll()
+                .antMatchers("/order/**").permitAll()
+                .anyRequest().permitAll()
                 .and()
                 .cors();
 

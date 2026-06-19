@@ -252,15 +252,15 @@ INSERT INTO `service_item` (`id`, `category_id`, `name`, `description`, `base_pr
 
 -- 测试用户（密码都是123456，BCrypt加密后的密码）
 INSERT INTO `user` (`id`, `phone`, `password`, `nickname`, `gender`, `address`, `longitude`, `latitude`, `status`) VALUES
-(1, '13800138001', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '张女士', 2, '北京市朝阳区建国路88号SOHO现代城A座', 116.467281, 39.908823, 1),
-(2, '13800138002', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '李先生', 1, '北京市海淀区中关村大街1号', 116.317619, 39.983615, 1),
-(3, '13800138003', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '王宝妈', 2, '北京市丰台区方庄小区1号楼', 116.437583, 39.872395, 1);
+(1, '13800138001', '$2a$10$tLe/m.Jp6dSuVRdlk1zpVu1DZX3eg0HVqHQUzNtNmE.Jpqjw/Bla.', '张女士', 2, '北京市朝阳区建国路88号SOHO现代城A座', 116.467281, 39.908823, 1),
+(2, '13800138002', '$2a$10$tLe/m.Jp6dSuVRdlk1zpVu1DZX3eg0HVqHQUzNtNmE.Jpqjw/Bla.', '李先生', 1, '北京市海淀区中关村大街1号', 116.317619, 39.983615, 1),
+(3, '13800138003', '$2a$10$tLe/m.Jp6dSuVRdlk1zpVu1DZX3eg0HVqHQUzNtNmE.Jpqjw/Bla.', '王宝妈', 2, '北京市丰台区方庄小区1号楼', 116.437583, 39.872395, 1);
 
 -- 测试手艺人
 INSERT INTO `artisan` (`id`, `phone`, `password`, `real_name`, `id_card`, `gender`, `certificate_no`, `work_years`, `skill_desc`, `longitude`, `latitude`, `service_radius`, `work_status`, `audit_status`, `status`) VALUES
-(1, '13900139001', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '理发师Tony', '110101199001011234', 1, 'HF202001001', 8, '擅长男士油头、女士时尚发型设计', 116.472810, 39.903823, 10, 1, 1, 1),
-(2, '13900139002', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '美甲师Lily', '110102199202022234', 2, 'MJ202105002', 5, '擅长法式美甲、光疗甲、日式美甲', 116.470000, 39.905000, 8, 1, 1, 1),
-(3, '13900139003', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '美容师小美', '110103199303033234', 2, 'MR201908003', 7, '擅长面部护理、身体护理、按摩', 116.465000, 39.910000, 12, 1, 1, 1);
+(1, '13900139001', '$2a$10$tLe/m.Jp6dSuVRdlk1zpVu1DZX3eg0HVqHQUzNtNmE.Jpqjw/Bla.', '理发师Tony', '110101199001011234', 1, 'HF202001001', 8, '擅长男士油头、女士时尚发型设计', 116.472810, 39.903823, 10, 1, 1, 1),
+(2, '13900139002', '$2a$10$tLe/m.Jp6dSuVRdlk1zpVu1DZX3eg0HVqHQUzNtNmE.Jpqjw/Bla.', '美甲师Lily', '110102199202022234', 2, 'MJ202105002', 5, '擅长法式美甲、光疗甲、日式美甲', 116.470000, 39.905000, 8, 1, 1, 1),
+(3, '13900139003', '$2a$10$tLe/m.Jp6dSuVRdlk1zpVu1DZX3eg0HVqHQUzNtNmE.Jpqjw/Bla.', '美容师小美', '110103199303033234', 2, 'MR201908003', 7, '擅长面部护理、身体护理、按摩', 116.465000, 39.910000, 12, 1, 1, 1);
 
 -- 手艺人技能关联
 INSERT INTO `artisan_skill` (`artisan_id`, `service_item_id`, `price`, `duration`, `status`) VALUES

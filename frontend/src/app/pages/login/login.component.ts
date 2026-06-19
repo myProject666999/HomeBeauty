@@ -29,11 +29,19 @@ export class LoginComponent {
     }
 
     this.submitting = true;
-    this.apiService.post('/user/login', this.loginForm.value)
+    const loginData = {
+      ...this.loginForm.value,
+      role: 'user'
+    };
+    this.apiService.post('/user/login', loginData)
       .subscribe({
         next: (res: any) => {
           if (res.code === 200) {
             this.apiService.setToken(res.data.token);
+            if (res.data.user) {
+              delete res.data.user.password;
+              localStorage.setItem('userInfo', JSON.stringify(res.data.user));
+            }
             alert('登录成功！');
             this.router.navigate(['/']);
           } else {
@@ -41,8 +49,8 @@ export class LoginComponent {
           }
           this.submitting = false;
         },
-        error: () => {
-          alert('登录失败，请稍后重试');
+        error: (err: any) => {
+          alert(err?.error?.message || '登录失败，请稍后重试');
           this.submitting = false;
         }
       });

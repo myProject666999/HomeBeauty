@@ -9,11 +9,11 @@
     </div>
     <div class="summary-row">
       <span class="label">服务价格：</span>
-      <span class="value price">¥{{ service.price }}</span>
+      <span class="value price">¥{{ service.basePrice }}</span>
     </div>
     <div class="summary-row">
       <span class="label">服务时长：</span>
-      <span class="value">{{ service.duration }}分钟</span>
+      <span class="value">约{{ service.defaultDuration }}分钟</span>
     </div>
   </div>
 
@@ -22,22 +22,45 @@
 
     <div class="form-group">
       <label>联系人姓名 *</label>
-      <input type="text" formControlName="customerName" class="form-control" placeholder="请输入您的姓名">
+      <input type="text" formControlName="contactName" class="form-control" placeholder="请输入您的姓名">
+      <div *ngIf="orderForm.get('contactName')?.touched && orderForm.get('contactName')?.invalid" class="error-text">
+        请输入联系人姓名
+      </div>
     </div>
 
     <div class="form-group">
       <label>联系电话 *</label>
-      <input type="tel" formControlName="customerPhone" class="form-control" placeholder="请输入手机号码">
+      <input type="tel" formControlName="contactPhone" class="form-control" placeholder="请输入手机号码">
+      <div *ngIf="orderForm.get('contactPhone')?.touched && orderForm.get('contactPhone')?.invalid" class="error-text">
+        请输入正确的手机号码
+      </div>
     </div>
 
     <div class="form-group">
-      <label>服务地址 *</label>
-      <input type="text" formControlName="serviceAddress" class="form-control" placeholder="请输入详细地址">
+      <label>上门地址 *</label>
+      <input type="text" formControlName="address" class="form-control" placeholder="请输入详细地址">
+      <div *ngIf="orderForm.get('address')?.touched && orderForm.get('address')?.invalid" class="error-text">
+        请输入上门地址
+      </div>
     </div>
 
     <div class="form-group">
-      <label>预约时间 *</label>
-      <input type="datetime-local" formControlName="appointmentTime" class="form-control">
+      <label>预约日期 *</label>
+      <input type="date" formControlName="appointmentDate" class="form-control" [min]="selectedDate">
+      <div *ngIf="orderForm.get('appointmentDate')?.touched && orderForm.get('appointmentDate')?.invalid" class="error-text">
+        请选择预约日期
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>预约时段 *</label>
+      <select formControlName="appointmentTime" class="form-control">
+        <option value="">请选择时段</option>
+        <option *ngFor="let slot of timeSlots" [value]="slot">{{ slot }}</option>
+      </select>
+      <div *ngIf="orderForm.get('appointmentTime')?.touched && orderForm.get('appointmentTime')?.invalid" class="error-text">
+        请选择预约时段
+      </div>
     </div>
 
     <div class="form-group">

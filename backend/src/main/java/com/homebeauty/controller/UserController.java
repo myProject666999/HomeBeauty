@@ -6,10 +6,12 @@ import com.homebeauty.dto.RegisterRequest;
 import com.homebeauty.entity.Artisan;
 import com.homebeauty.entity.User;
 import com.homebeauty.service.UserService;
+import com.homebeauty.util.JwtUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Map;
 
@@ -20,6 +22,33 @@ public class UserController {
 
     @Resource
     private UserService userService;
+
+    @GetMapping("/info")
+    public Result<User> getUserInfo(HttpServletRequest request) {
+        log.debug("获取当前用户信息接口被调用");
+        try {
+            String token = request.getHeader("Authorization");
+            if (token != null && token.startsWith("Bearer ")) {
+                token = token.substring(7);
+            }
+            if (token == null || !JwtUtil.validateToken(token)) {
+                return Result.error(401, "未登录或登录已过期");
+            }
+            Long userId = JwtUtil.getUserIdFromToken(token);
+            if (userId == null) {
+                return Result.error(401, "无效的token");
+            }
+            User user = userService.getUserById(userId);
+            if (user == null) {
+                return Result.error("用户不存在");
+            }
+            user.setPassword(null);
+            return Result.success(user);
+        } catch (Exception e) {
+            log.error("获取当前用户信息失败: {}", e.getMessage(), e);
+            return Result.error(e.getMessage());
+        }
+    }
 
     @PostMapping("/register")
     public Result<Map<String, Object>> register(@RequestBody RegisterRequest request) {

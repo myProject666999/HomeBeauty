@@ -4,10 +4,14 @@ import { ApiService } from '../../services/api.service';
 
 interface UserInfo {
   id: number;
-  username: string;
   phone: string;
   nickname: string;
   avatar: string;
+  gender: number;
+  address: string;
+  longitude: number;
+  latitude: number;
+  status: number;
 }
 
 @Component({
@@ -29,6 +33,15 @@ export class UserCenterComponent implements OnInit {
   }
 
   loadUserInfo(): void {
+    const cachedUser = localStorage.getItem('userInfo');
+    if (cachedUser) {
+      try {
+        this.user = JSON.parse(cachedUser);
+      } catch (e) {
+        localStorage.removeItem('userInfo');
+      }
+    }
+
     const token = this.apiService.getToken();
     if (!token) {
       this.router.navigate(['/login']);
@@ -41,6 +54,7 @@ export class UserCenterComponent implements OnInit {
         next: (res: any) => {
           if (res.code === 200) {
             this.user = res.data;
+            localStorage.setItem('userInfo', JSON.stringify(res.data));
           }
           this.loading = false;
         },
@@ -53,6 +67,7 @@ export class UserCenterComponent implements OnInit {
   logout(): void {
     if (confirm('确定要退出登录吗？')) {
       this.apiService.setToken('');
+      localStorage.removeItem('userInfo');
       this.router.navigate(['/login']);
     }
   }
