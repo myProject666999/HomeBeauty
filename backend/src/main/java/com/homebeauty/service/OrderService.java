@@ -92,18 +92,6 @@ public class OrderService {
             log.debug("系统匹配到手艺人: artisanId={}", artisanId);
         }
 
-        boolean reserved = bookingSlotService.reserveSlot(
-                artisanId,
-                request.getAppointmentDate(),
-                request.getAppointmentTime(),
-                null,
-                request.getUserId()
-        );
-        if (!reserved) {
-            log.error("时段锁定失败，可能已被占用");
-            throw new RuntimeException("时段锁定失败，请重新选择时间");
-        }
-
         QueryWrapper<ArtisanSkill> skillWrapper = new QueryWrapper<>();
         skillWrapper.eq("artisan_id", artisanId)
                 .eq("service_item_id", request.getServiceItemId())
@@ -132,7 +120,23 @@ public class OrderService {
         order.setPayStatus(0);
 
         orderMapper.insert(order);
+
+        QueryWrapper<Order> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("order_no", order.getOrderNo());
+        order = orderMapper.selectOne(queryWrapper);
         log.debug("订单创建成功: orderId={}, orderNo={}", order.getId(), order.getOrderNo());
+
+        boolean reserved = bookingSlotService.reserveSlot(
+                artisanId,
+                request.getAppointmentDate(),
+                request.getAppointmentTime(),
+                order.getId(),
+                request.getUserId()
+        );
+        if (!reserved) {
+            log.error("时段锁定失败，可能已被占用");
+            throw new RuntimeException("时段锁定失败，请重新选择时间");
+        }
 
         String checkInCode = bookingSlotService.generateCheckInCode(order.getId());
         order.setCheckInCode(checkInCode);

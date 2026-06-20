@@ -6,18 +6,18 @@
   <div class="order-card card" *ngFor="let order of orders">
     <div class="order-header">
       <span class="order-no">订单号：{{ order.orderNo }}</span>
-      <span class="order-status" [class]="getStatusClass(order.status)">{{ getStatusText(order.status) }}</span>
+      <span class="order-status" [class]="getStatusClass(order.orderStatus)">{{ getStatusText(order.orderStatus) }}</span>
     </div>
     <div class="order-content">
       <h3 class="order-service">{{ order.serviceName }}</h3>
       <div class="order-info">
-        <p><span>预约时间：</span>{{ order.appointmentTime }}</p>
+        <p><span>预约时间：</span>{{ getFullAppointmentTime(order) }}</p>
         <p><span>下单时间：</span>{{ order.createTime }}</p>
       </div>
       <div class="order-footer">
         <span class="order-price">¥{{ order.price }}</span>
         <div class="order-actions">
-          <button *ngIf="order.status === 'PENDING'" class="btn btn-cancel" (click)="cancelOrder(order.id)">取消订单</button>
+          <button *ngIf="order.orderStatus === 0" class="btn btn-cancel" (click)="cancelOrder(order.id)">取消订单</button>
           <button class="btn btn-primary">查看详情</button>
         </div>
       </div>
